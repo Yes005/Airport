@@ -24,5 +24,5 @@ public class Flight {
     private String arrivalTime;
 
 
-    Airline arline;
+    Airline airline;
 }

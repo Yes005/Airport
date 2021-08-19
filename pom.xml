@@ -13,6 +13,26 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
+	    <dependency>
+           <groupId>org.sonarsource.sonarlint.core</groupId>
+           <artifactId>sonarlint-core</artifactId>
+           <version>6.2.0.34235</version>
+       </dependency>
+       <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.8.7</version>
+       </dependency>
+       <dependency>
+          <groupId>org.apache.maven.shared</groupId>
+          <artifactId>file-management</artifactId>
+          <version>3.0.0</version>
+       </dependency>
+       <dependency>
+         <groupId>org.apache.james</groupId>
+         <artifactId>apache-james-mailbox-quota-mailing</artifactId>
+         <version>3.6.0</version>
+       </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
