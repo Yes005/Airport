@@ -3,6 +3,18 @@ package com.airport.group6;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import java.util.Properties;
+
+
 public class Flight {
 
     @Getter @Setter
@@ -25,4 +37,55 @@ public class Flight {
 
 
     Airline airline;
+
+    public void sendEmail() throws MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port","587");
+        props.setProperty("mail.smtp.user", "yeshuab3@gmail.com");
+        props.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(props, null);
+        session.setDebug(true);
+
+        BodyPart bodyPart = new MimeBodyPart();
+        bodyPart.setText("Message");
+
+        BodyPart attached = new MimeBodyPart();
+        attached.setDataHandler(new DataHandler(new FileDataSource("ejemplo.xlsx")));
+        attached.setFileName("ejemplo.xlsx");
+
+        MimeMultipart multipart = new MimeMultipart();
+
+        multipart.addBodyPart(bodyPart);
+        multipart.addBodyPart(attached);
+
+        MimeMessage message = new MimeMessage(session);
+
+        // Se rellena el From
+        message.setFrom(new InternetAddress("yeshuab3@gmail.com"));
+
+        // Se rellenan los destinatarios
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("yeshuab3@gmail.com"));
+
+        // Se rellena el subject
+        message.setSubject("Hola");
+
+        // Se mete el texto y la foto adjunta.
+        message.setContent(multipart);
+
+        Transport t = session.getTransport("smtp");
+        t.connect("yeshuab3@@gmail.com","Diosesbueno");
+        t.sendMessage(message,message.getAllRecipients());
+        t.close();
+
+        System.out.print("Send message");
+
+    }
+
+    public static void main(String[] args) throws MessagingException {
+        Flight flight = new Flight();
+        flight.sendEmail();
+    }
 }

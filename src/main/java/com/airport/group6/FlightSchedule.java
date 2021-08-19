@@ -26,11 +26,11 @@ public class FlightSchedule {
     }
 
     public static void main(String[] args){
-        Scanner leer = new Scanner(System.in);
-        System.out.print("Presopma una letras");
-        String m = leer.nextLine();
+        //Scanner leer = new Scanner(System.in);
+        //System.out.print("Presopma una letras");
+        //String m = leer.nextLine();
 
-        Flight flightItems = new Flight();
+        //Flight flightItems = new Flight();
         List<Flight> flightCatalogue = new ArrayList<>();
 
         menuFlight menu = new menuFlight(flightCatalogue);

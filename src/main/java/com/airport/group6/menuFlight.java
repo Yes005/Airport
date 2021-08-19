@@ -48,7 +48,7 @@ public class menuFlight {
         System.out.print("Enter the Arrival Time: ");
         flightItems.setArrivalTime(leer.nextLine());
         flightCatalogue.add(flightItems);
-        flightItems = new Flight();
+        //flightItems = new Flight();
         /*//aircratf
         System.out.print("Enter the plane model: ");
         aircraftItems.setModel(leer.nextLine());
