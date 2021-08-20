@@ -88,7 +88,7 @@ public class Flight {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.setProperty("mail.smtp.starttls.enable", "true");
         props.setProperty("mail.smtp.port","587");
-        props.setProperty("mail.smtp.user", "yeshuab3@gmail.com");
+        props.setProperty("mail.smtp.user", "aeroportgroup06@gmail.com");
         props.setProperty("mail.smtp.auth", "true");
 
         Session session = Session.getDefaultInstance(props, null);
@@ -98,8 +98,8 @@ public class Flight {
         bodyPart.setText("Message");
 
         BodyPart attached = new MimeBodyPart();
-        attached.setDataHandler(new DataHandler(new FileDataSource("ejemplo.xlsx")));
-        attached.setFileName("ejemplo.xlsx");
+        attached.setDataHandler(new DataHandler(new FileDataSource("Data.xlsx")));
+        attached.setFileName("Data.xlsx");
 
         MimeMultipart multipart = new MimeMultipart();
 
@@ -109,7 +109,7 @@ public class Flight {
         MimeMessage message = new MimeMessage(session);
 
         // Se rellena el From
-        message.setFrom(new InternetAddress("yeshuab3@gmail.com"));
+        message.setFrom(new InternetAddress("aeroportgroup06@gmail.com"));
 
         // Se rellenan los destinatarios
         message.addRecipient(Message.RecipientType.TO, new InternetAddress("yeshuab3@gmail.com"));
@@ -121,7 +121,7 @@ public class Flight {
         message.setContent(multipart);
 
         Transport t = session.getTransport("smtp");
-        t.connect("yeshuab3@@gmail.com","Diosesbueno");
+        t.connect("aeroportgroup06@gmail.com","123qweQWE");
         t.sendMessage(message,message.getAllRecipients());
         t.close();
 
@@ -129,8 +129,8 @@ public class Flight {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, MessagingException {
         Flight flight = new Flight();
-        flight.readExcel();
+        flight.sendEmail();
     }
 }
