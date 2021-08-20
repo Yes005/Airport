@@ -6,6 +6,8 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -16,10 +18,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.util.Iterator;
 import java.util.Properties;
 
 
@@ -45,6 +45,31 @@ public class Flight {
 
 
     Airline airline;
+
+    public void readExcel(){
+        try {
+            String ruteExcel = "Data.xlsx";
+            FileInputStream inputStream = new FileInputStream(ruteExcel);
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet sheet = workbook.getSheetAt(0);
+            Iterator iterator = sheet.iterator();
+
+            DataFormatter formatter = new DataFormatter();
+            while (iterator.hasNext()){
+                Row nextRow = (Row) iterator.next();
+                Iterator cellIterator = nextRow.cellIterator();
+                while (cellIterator.hasNext()){
+                    Cell cell = (Cell) cellIterator.next();
+                    String contentCell = formatter.formatCellValue(cell);
+                    System.out.println("Cell: " + contentCell);
+                }
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void createExcel() throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -106,6 +131,6 @@ public class Flight {
 
     public static void main(String[] args) throws IOException {
         Flight flight = new Flight();
-        flight.createExcel();
+        flight.readExcel();
     }
 }
