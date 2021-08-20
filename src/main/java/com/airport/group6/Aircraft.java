@@ -1,9 +1,8 @@
 package com.airport.group6;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class Aircraft {
 
     @Getter @Setter
     String model;
-    //agrego el nombre de la aerolinea aca jo
+
     @Getter @Setter
     String airlineName;
 

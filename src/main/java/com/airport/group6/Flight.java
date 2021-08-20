@@ -2,6 +2,10 @@ package com.airport.group6;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -12,6 +16,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 
 
@@ -37,6 +45,18 @@ public class Flight {
 
 
     Airline airline;
+
+    public void createExcel() throws IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Sheet1");
+        HSSFRow row = sheet.createRow(0);
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue("¡Example!");
+        OutputStream out = new FileOutputStream("src/main/resources/ExampleExcel.xls");
+        workbook.write(out);
+
+        System.out.print("Create Excel successfully");
+    }
 
     public void sendEmail() throws MessagingException {
         Properties props = new Properties();
@@ -84,8 +104,8 @@ public class Flight {
 
     }
 
-    public static void main(String[] args) throws MessagingException {
+    public static void main(String[] args) throws IOException {
         Flight flight = new Flight();
-        flight.sendEmail();
+        flight.createExcel();
     }
 }
