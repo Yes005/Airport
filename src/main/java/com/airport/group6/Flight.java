@@ -95,7 +95,7 @@ public class Flight {
         session.setDebug(true);
 
         BodyPart bodyPart = new MimeBodyPart();
-        bodyPart.setText("Message");
+        bodyPart.setText("Hi! \nThese are the flights you requested. Enjoy the trip.");
 
         BodyPart attached = new MimeBodyPart();
         attached.setDataHandler(new DataHandler(new FileDataSource("Data.xlsx")));
@@ -108,14 +108,14 @@ public class Flight {
 
         MimeMessage message = new MimeMessage(session);
 
-        // Se rellena el From
+        // From
         message.setFrom(new InternetAddress("aeroportgroup06@gmail.com"));
 
-        // Se rellenan los destinatarios
+        // recipients
         message.addRecipient(Message.RecipientType.TO, new InternetAddress("yeshuab3@gmail.com"));
 
-        // Se rellena el subject
-        message.setSubject("Hola");
+        // subject
+        message.setSubject("Flight");
 
         // Se mete el texto y la foto adjunta.
         message.setContent(multipart);
